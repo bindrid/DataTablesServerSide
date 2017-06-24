@@ -1,0 +1,50 @@
+      
+      
+    
+    
+   These classes are used as part of the request 
+        public class DataTableParameter
+        {
+            public int draw { get; set; }
+            public int length { get; set; }
+            public int start { get; set; }
+            public List<columm> columns { get; set; }
+        }
+        public struct columm
+        {
+            public string data;
+            public string name;
+            public Boolean searchable;
+            public Boolean orderable;
+            public searchValue Search;
+        }
+        public struct searchValue
+        {
+            public string value;
+            public Boolean regex;
+        }
+        
+    
+    The two classes below are used for objects being retired to the client.  
+         public struct DataTableResponse
+        {
+            public int draw;
+            public int recordsTotal;
+            public int recordsFiltered;
+            // dtData would be defined  appropriate to your environment.
+            // Shown here, it matches most of the samples used on datatables.net
+            public List<dtData> data;
+        }
+
+        
+        // Single datatable row  
+        public class dtData
+        {
+            public string name;
+            public string position;
+            public Int32 salary;
+            public string start_date;
+            public string office;
+            public string extn;
+        }
+
