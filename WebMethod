@@ -1,0 +1,36 @@
+namespace LaptopWeb
+{
+    /// <summary>
+    /// Summary description for wsSample
+    /// </summary>
+    [WebService(Namespace = "http://tempuri.org/")]
+    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    [System.ComponentModel.ToolboxItem(false)]
+    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
+    [System.Web.Script.Services.ScriptService]
+    public class wsSample : System.Web.Services.WebService
+    {
+        /// <summary>
+        /// Gets the data specific to the parameters contained in dtParameters.
+        /// All these parameters are discribed in detail at 
+        /// </summary>
+        /// <param name="dtParameters"></param>
+        /// <returns></returns>
+
+        [WebMethod]
+        public DataTableResponse GetDTDataUnserializedObject(DataTableParameter dtParameters)
+        {
+            // get the requested data.
+            DataTableResponse res = DataAccessStuff.GetDataTableResponse(dtParameters);
+            // The following values must be set by the data access layer so it knows how to do the paging.
+            // res.recordsTotal = 56;
+            // res.recordsFiltered = 56;
+            // res.data = the data returned by the database and put in a List<dtData>
+           
+            // Draw is what keeps the requests in sync particularly when another 
+            // one is fired off will still waiting for the first response.
+            res.draw = dtParameters.draw;
+            return res;
+        }
+    }
+}
