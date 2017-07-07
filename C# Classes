@@ -2,7 +2,8 @@
       
     
     
-   These classes are used as part of the request 
+   //These classes are used as part of the request 
+   // each field is defined at https://datatables.net/manual/server-side
         public class DataTableParameter
         {
             public int draw { get; set; }
@@ -25,7 +26,9 @@
         }
         
     
-    The two classes below are used for objects being retired to the client.  
+    //The two classes below are used for objects being returned to the client. 
+    // dtData should defined to fit your data, the rest of the fields are also descibed at 
+    //https://datatables.net/manual/server-side
          public struct DataTableResponse
         {
             public int draw;
@@ -37,7 +40,7 @@
         }
 
         
-        // Single datatable row  
+        // Single datatable row  used in most examples at the datatables.net.
         public class dtData
         {
             public string name;
