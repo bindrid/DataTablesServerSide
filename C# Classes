@@ -1,53 +1,47 @@
-      
-      
-    
-    
-   //These classes are used as part of the request 
-   // each field is defined at https://datatables.net/manual/server-side
-        public class DataTableParameter
-        {
-            public int draw { get; set; }
-            public int length { get; set; }
-            public int start { get; set; }
-            public List<columm> columns { get; set; }
-        }
-        public struct columm
-        {
-            public string data;
-            public string name;
-            public Boolean searchable;
-            public Boolean orderable;
-            public searchValue Search;
-        }
-        public struct searchValue
-        {
-            public string value;
-            public Boolean regex;
-        }
-        
-    
-    //The two classes below are used for objects being returned to the client. 
-    // dtData should defined to fit your data, the rest of the fields are also descibed at 
-    //https://datatables.net/manual/server-side
-         public struct DataTableResponse
-        {
-            public int draw;
-            public int recordsTotal;
-            public int recordsFiltered;
-            // dtData would be defined  appropriate to your environment.
-            // Shown here, it matches most of the samples used on datatables.net
-            public List<dtData> data;
-        }
+    // So my web service returns a serialize version of this
+    [Serializable()]
+    public class DataTableResponse
+    {
 
-        
-        // Single datatable row  used in most examples at the datatables.net.
-        public class dtData
-        {
-            public string name;
-            public string position;
-            public Int32 salary;
-            public string start_date;
-            public string office;
-            public string extn;
-        }
+        public int draw { get; set; }
+        public int recordsTotal { get; set; }
+        public int recordsFiltered { get; set; }
+        public List<dtData> data { get; set; }
+        public DataTableResponse() { }
+    }
+    [Serializable()]
+    public class DataTableParameter
+    {
+        public int draw { get; set; }
+        public int length { get; set; }
+        public int start { get; set; }
+        public List<columm> columns { get; set; }
+    }
+    [Serializable()]
+    public class columm
+    {
+        public string data { get; set; }
+        public string name { get; set; }
+        public Boolean searchable { get; set; }
+        public Boolean orderable { get; set; }
+        public searchValue Search { get; set; }
+    }
+    [Serializable()]
+    public class searchValue
+    {
+        public string value { get; set; }
+        public Boolean regex { get; set; }
+    }
 
+    // Single datatable row  
+    [Serializable()]
+    public class dtData
+    {
+        public int employeeId { get; set; }
+        public string name { get; set; }
+        public string position { get; set; }
+        public Int32 salary { get; set; }
+        public string start_date { get; set; }
+        public string office { get; set; }
+        public string extn { get; set; }
+    }
