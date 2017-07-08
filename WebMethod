@@ -1,3 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Services;
+using CommonStuff;
+
 namespace LaptopWeb
 {
     /// <summary>
@@ -11,6 +18,7 @@ namespace LaptopWeb
     public class wsSample : System.Web.Services.WebService
     {
         /// <summary>
+        /// Use this when serverSide is true
         /// Gets the data specific to the parameters contained in dtParameters.
         /// All these parameters are discribed in detail at 
         /// </summary>
@@ -20,6 +28,7 @@ namespace LaptopWeb
         [WebMethod]
         public DataTableResponse GetDTDataUnserializedObject(DataTableParameter dtParameters)
         {
+            
             // get the requested data.
             DataTableResponse res = DataAccessStuff.GetDataTableResponse(dtParameters);
             // The following values must be set by the data access layer so it knows how to do the paging.
@@ -31,6 +40,17 @@ namespace LaptopWeb
             // one is fired off will still waiting for the first response.
             res.draw = dtParameters.draw;
             return res;
+        }
+
+        /// <summary>
+        /// Use this method when serverSide is false. It returns all 
+        /// employees in the employee table.
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod]
+        public List<dtData> GetAllEmployees()
+        {
+            return DataAccessStuff.getDataTableData();
         }
     }
 }
