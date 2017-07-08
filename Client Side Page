@@ -1,0 +1,71 @@
+<!--<!DOCTYPE html>-->
+<html>
+<head>
+    <title>Simple Client Side</title>
+    <meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+
+    <script src="Scripts/blockui.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var table = $('#example').DataTable({
+                "processing": true,
+                "serverSide": false,
+
+                rowId: "employeeId",
+                "createdRow": function (row, data, dataIndex) { },
+                "columns": [
+                    { "data": "name" },
+                    { "data": "position" },
+                    { "data": "office" },
+                    { "data": "extn" },
+                    { "data": "start_date" },
+                    { "data": "salary" }
+                ],
+                "select": "multi",
+                "lengthMenu": [5, [10, 15, 25, 50, -1], [5, 10, 15, 25, 50, "All"]],
+                "pageLength": 5,
+                "ajax": {
+                    contentType: "application/json; charset=utf-8",
+                    url: "wsSample.asmx/GetAllEmployees",
+                    type: "Post",
+                    dataSrc: "d"
+                },
+                order: [[0, 'asc']]
+            });
+
+        });
+
+    </script>
+
+</head>
+    <body>
+        <table class="display" id="example" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Phone</th>
+                    <th>Start date</th>
+                    <th>Salary</th>
+                </tr>
+
+            </thead>
+            <tfoot>
+                <tr class="searchRow">
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Phone</th>
+                    <th>Start date</th>
+                    <th>Salary</th>
+                </tr>
+            </tfoot>
+        </table>
+    </body>
+</html>
