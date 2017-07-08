@@ -1,0 +1,82 @@
+<!--<!DOCTYPE html>-->
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            var table = $('#example').DataTable({
+                "processing": true,
+                "serverSide": true,
+
+                "columns":  [
+                    { "data": "name" },
+                    { "data": "position" },
+                    { "data": "office" },
+                    { "data": "extn" },
+                    { "data": "start_date" },
+                    { "data": "salary" }
+                ],
+                "select":"multi",
+                "lengthMenu": [5, [10, 15, 25, 50, -1], [5, 10, 15, 25, 50, "All"]],
+                "pageLength": 5,
+                "ajax": {
+                    contentType: "application/json; charset=utf-8",
+                    url: "wsSample.asmx/GetDTDataUnserializedObject",
+                    type: "Post",
+                    // compensate for where .net puts the data in the d object
+                    dataSrc:"d.data",
+                    data: function (dtParms) {
+                        // notice dtParameters exactly matches the web service parameter name
+                        return JSON.stringify({ dtParameters: dtParms });
+                    },
+                    error: function (error) {
+                        console.log(x);
+                    }
+                },
+                order: [[0, 'asc']]
+            });
+
+        });
+ 
+    </script>
+
+</head>
+<body>
+  
+    <button type="button" id="btnDraw">Draw</button>
+    <table width="100%" class="display" id="example" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Phone</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+
+        </thead>
+        <tfoot>
+             <tr class="searchRow">
+                 <th>Name</th>
+                 <th>Position</th>
+                 <th>Office</th>
+                 <th>Phone</th>
+                 <th>Start date</th>
+                 <th>Salary</th>
+            </tr>
+        </tfoot>
+    </table>
+
+    <script>
+    
+    </script>
+</body>
+</html>
